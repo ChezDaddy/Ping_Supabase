@@ -1,0 +1,16 @@
+# .github/workflows/supabase-keepalive.yml
+name: Supabase Keep-Alive
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # toutes les 6h, large marge sous le seuil de 7 jours
+  workflow_dispatch:         # bouton "Run" manuel dans l'onglet Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping CerfaDon
+        run: curl -s -o /dev/null -w "CerfaDon: %{http_code}\n" "https://fxkussqoufndsvgnsqao.supabase.co/rest/v1/cafes?select=id&limit=1" -H "apikey: ${{ secrets.CERFADON_ANON }}"
+      - name: Ping DaddyPay
+        run: curl -s -o /dev/null -w "DaddyPay: %{http_code}\n" "https://<projet>.supabase.co/rest/v1/<table>?select=id&limit=1" -H "apikey: ${{ secrets.DADDYPAY_ANON }}"
+      # ... une ligne par projet (DaddyLodge, DaddyBaux, DaddyChantiers)
