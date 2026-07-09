@@ -1,16 +1,53 @@
-# .github/workflows/supabase-keepalive.yml
 name: Supabase Keep-Alive
+
 on:
   schedule:
-    - cron: '0 */6 * * *'   # toutes les 6h, large marge sous le seuil de 7 jours
-  workflow_dispatch:         # bouton "Run" manuel dans l'onglet Actions
+    - cron: '0 */6 * * *'   # toutes les 6h
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
       - name: Ping CerfaDon
-        run: curl -s -o /dev/null -w "CerfaDon: %{http_code}\n" "https://fxkussqoufndsvgnsqao.supabase.co/rest/v1/cafes?select=id&limit=1" -H "apikey: ${{ secrets.CERFADON_ANON }}"
+        run: |
+          curl -s -o /dev/null -w "CerfaDon: %{http_code}\n" \
+            "https://fxkussqoufndsvgnsqao.supabase.co/rest/v1/?select=id&limit=1" \
+            -H "apikey: ${{ secrets.CERFA_DONS }}"
+
+      - name: Ping DaddyBaux
+        run: |
+          curl -s -o /dev/null -w "DaddyBaux: %{http_code}\n" \
+            "https://cafkamkmwupkehvbcm.supabase.co/rest/v1/?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_BAUX }}"
+
+      - name: Ping DaddyChantier
+        run: |
+          curl -s -o /dev/null -w "DaddyChantier: %{http_code}\n" \
+            "https://fokjnreiytpqucwbyxub.supabase.co/rest/v1/?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_CHANTIER }}"
+
+      - name: Ping DaddyLodge
+        run: |
+          curl -s -o /dev/null -w "DaddyLodge: %{http_code}\n" \
+            "https://ruxytkkxafkdubujtehq.supabase.co/rest/v1/?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_LODGE }}"
+
       - name: Ping DaddyPay
-        run: curl -s -o /dev/null -w "DaddyPay: %{http_code}\n" "https://<projet>.supabase.co/rest/v1/<table>?select=id&limit=1" -H "apikey: ${{ secrets.DADDYPAY_ANON }}"
-      # ... une ligne par projet (DaddyLodge, DaddyBaux, DaddyChantiers)
+        run: |
+          curl -s -o /dev/null -w "DaddyPay: %{http_code}\n" \
+            "https://hhxuumexyvoxomoarmul.supabase.co/rest/v1/?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_PAY }}"
+
+      - name: Ping DaddyCool
+        run: |
+          curl -s -o /dev/null -w "DaddyCool: %{http_code}\n" \
+            "https://qdimghftvgqwxjizjhpf.supabase.co/rest/v1/app_users?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_COOL }}"
+
+      
+      - name: Ping DaddyMatch
+        run: |
+          curl -s -o /dev/null -w "DaddyMatch %{http_code}\n" \
+            "https://cwhzveqfnyextbjscsox.supabase.co/rest/v1/app_users?select=id&limit=1" \
+            -H "apikey: ${{ secrets.DADDY_MATCH }}"
