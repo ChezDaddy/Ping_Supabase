@@ -45,9 +45,8 @@ jobs:
             "https://qdimghftvgqwxjizjhpf.supabase.co/rest/v1/app_users?select=id&limit=1" \
             -H "apikey: ${{ secrets.DADDY_COOL }}"
 
-      
       - name: Ping DaddyMatch
         run: |
-          curl -s -o /dev/null -w "DaddyMatch %{http_code}\n" \
+          curl -s -o /dev/null -w "DaddyMatch: %{http_code}\n" \
             "https://cwhzveqfnyextbjscsox.supabase.co/rest/v1/app_users?select=id&limit=1" \
             -H "apikey: ${{ secrets.DADDY_MATCH }}"
