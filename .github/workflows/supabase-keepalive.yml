@@ -18,7 +18,7 @@ jobs:
       - name: Ping DaddyBaux
         run: |
           curl -s -o /dev/null -w "DaddyBaux: %{http_code}\n" \
-            "https://cafkamkmwupkehvbcm.supabase.co/rest/v1/?select=id&limit=1" \
+            "https://cafkamkmwupkehvbcmli.supabase.co/rest/v1/?select=id&limit=1" \
             -H "apikey: ${{ secrets.DADDY_BAUX }}"
 
       - name: Ping DaddyChantier
