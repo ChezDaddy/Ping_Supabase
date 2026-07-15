@@ -28,9 +28,10 @@ jobs:
             -H "apikey: ${{ secrets.DADDY_CHANTIER }}"
 
       - name: Ping DaddyLodge
+        continue-on-error: true
         run: |
           curl -s -o /dev/null -w "DaddyLodge: %{http_code}\n" \
-            "https://ruxytkkxafkdubujtehq.supabase.co/rest/v1/?select=id&limit=1" \
+            "https://ruxytkkxafkdubujtehq.supabase.co/rest/v1/dl_carte?select=id&limit=1" \
             -H "apikey: ${{ secrets.DADDY_LODGE }}"
 
       - name: Ping DaddyPay
